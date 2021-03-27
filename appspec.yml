@@ -1,0 +1,17 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /opt/installer
+hooks:
+  ApplicationStop:
+    - location: /opt/installer/scripts/apacheinstall.sh
+      timeout: 300
+  BeforeInstall:
+    - location: /opt/installer/scripts/index.sh
+      timeout: 300
+  ApplicationStart:
+    - location: /opt/installer/scripts/verify.sh
+      timeout: 300
+  ValidateService:
+    - location:  /opt/installer/scripts/validate.sh
